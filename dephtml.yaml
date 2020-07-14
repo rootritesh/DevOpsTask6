@@ -1,0 +1,55 @@
+piVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: html-pvc
+  labels:
+    name: html-pvc
+
+spec:
+  accessModes:
+   - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: html
+  labels:
+    app: html
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: html
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myhtml
+spec:
+  selector:
+    matchLabels:
+      env: production
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        env: production
+    spec:
+      containers:
+      - name: html-dep
+        image: httpd
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name: html-pvc
+            mountPath: /usr/local/apache2/htdocs
+      volumes:
+      - name: html-pvc
+        persistentVolumeClaim:
+          claimName: html-pvc
+~
