@@ -1,2 +1,2 @@
 FROM rootritesh/webserver-php
-COPY index.html /var/www/html/index.php
+COPY index.php /var/www/html/index.php
