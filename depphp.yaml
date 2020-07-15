@@ -33,12 +33,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      env: production
+      app: php
   replicas: 1
   template:
     metadata:
       labels:
-        env: production
+        app: php
     spec:
       containers:
       - name: php-dep
@@ -52,3 +52,4 @@ spec:
       - name: php-pvc
         persistentVolumeClaim:
           claimName: php-pvc
+
