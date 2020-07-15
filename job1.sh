@@ -19,6 +19,7 @@ POD=$(kubectl get pods -l app=html -o jsonpath="{.items[*].metadata.name}")
 sudo kubectl cp *.php $POD:/var/www/html
 else
 sudo kubectl create -f dephtml.yaml
+sleep 10
 POD=$(kubectl get pods -l app=html -o jsonpath="{.items[*].metadata.name}")
 sudo kubectl cp *.php $POD:/usr/local/apache2/htdocs
 fi
