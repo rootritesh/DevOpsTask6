@@ -18,7 +18,7 @@ echo "html conatiner already running"
 POD=$(kubectl get pods -l app=html -o jsonpath="{.items[*].metadata.name}")
 kubectl cp *.html $POD:/var/www/html
 else
-sudo kubectl create -f dephtml.yaml
+kubectl create -f dephtml.yaml
 sleep 10
 POD=$(kubectl get pods -l app=html -o jsonpath="{.items[*].metadata.name}")
 kubectl cp *.html $POD:/usr/local/apache2/htdocs
