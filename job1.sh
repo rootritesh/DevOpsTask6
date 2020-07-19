@@ -6,7 +6,7 @@ echo "php container already running"
 POD=$(kubectl get pods -l app=php -o jsonpath="{.items[*].metadata.name}")
 kubectl cp *.php $POD:/var/www/html
 else
-sudo kubectl create -f depphp.yaml
+kubectl create -f depphp.yaml
 sleep 10
 POD=$(kubectl get pods -l app=php -o jsonpath="{.items[*].metadata.name}")
 kubectl cp *.php $POD:/var/www/html
